@@ -10,12 +10,12 @@ class WeeklyWeather extends React.Component {
       latitude: 0,
       longitude: 0,
       name: '',
+      date: '',
       description: '',
       icon: '',
       temp: 0,
       humidity: 0,
-      windSpeed: 0,
-      windDeg: 0
+      windSpeed: 0
     }
 
     this.apiKey = 'daa9adc7b62436c44254050a71f5ed02';
@@ -27,17 +27,17 @@ class WeeklyWeather extends React.Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       });
-      axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.state.latitude}&lon=${this.state.longitude}&APPID=${this.apiKey}`)
+      axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.state.latitude}&lon=${this.state.longitude}&units=metric&lang=fr&APPID=${this.apiKey}`)
         .then((response) => {
           console.log(response)
           this.setState({
-            // name: response.data.name,
-            // description: response.data.weather[0].description,
-            // icon: response.data.weather[0].icon,
-            // temp: response.data.main.temp,
-            // humidity: response.data.main.humidity,
-            // windSpeed: response.data.wind.speed,
-            // windDeg: response.data.wind.deg
+            name: response.data.city.name,
+            date: response.data.list[6].dt_txt,
+            description: response.data.list[6].weather[0].description,
+            icon: response.data.list[6].weather[0].icon,
+            temp: response.data.list[6].main.temp,
+            humidity: response.data.list[6].main.humidity,
+            windSpeed: response.data.list[6].wind.speed
           });
         })
     })
@@ -49,12 +49,12 @@ class WeeklyWeather extends React.Component {
     return (
       <div>
         <h1>{this.state.name}</h1>
-        {/* <img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt={this.state.description} /> */}
+        <p>{this.state.date}</p>
+        <img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt={this.state.description} />
         <small>{this.state.description}</small>
         <p>{this.state.temp} °C</p>
         <p>{this.state.humidity} %</p>
-        <p>{this.state.windSpeed * 3.6} km/h</p>
-        <FontAwesomeIcon icon={faArrowCircleUp} style={{ transform: `rotate(${this.state.windDeg}deg)` }} size="2x" />
+        <p>{this.state.windSpeed} km/h</p>
       </div>
     )
   };
