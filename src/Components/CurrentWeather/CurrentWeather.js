@@ -49,7 +49,7 @@ class CurrentWeather extends React.Component {
         <h1>{this.state.name}</h1>
         <img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt={this.state.description} />
         <small>{this.state.description}</small>
-        <p>{this.state.temp} °C</p>
+        <p>{Math.round(this.state.temp)} °C</p>
         <p>{this.state.humidity} %</p>
         <p>{this.state.windSpeed * 3.6} km/h</p>
         <FontAwesomeIcon icon={faArrowCircleUp} style={{ transform: `rotate(${this.state.windDeg}deg)` }} size="2x" />
