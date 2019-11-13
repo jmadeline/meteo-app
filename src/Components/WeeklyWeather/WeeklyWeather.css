@@ -1,0 +1,4 @@
+.weeklyWeather {
+    display: flex;
+    justify-content: space-around;
+}
