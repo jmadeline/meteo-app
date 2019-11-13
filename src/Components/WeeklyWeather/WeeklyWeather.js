@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './WeeklyWeather.css';
+import { faTint } from '@fortawesome/free-solid-svg-icons';
 
 class WeeklyWeather extends React.Component {
   constructor() {
@@ -33,7 +35,8 @@ class WeeklyWeather extends React.Component {
     //filtrer 7 / 15 / 23 / 31 / 39
     return (
       <>
-        <h2>Prévision à cinq jour</h2>
+        <hr />
+        <h2>Prévisions à 5 jours</h2>
         <div className='weeklyWeather'>
           {this.state.fiveDayWeather.filter((weather, index) => { if (index === 7 || index === 15 || index === 23 || index === 31 || index === 39) { return weather } })
             .map((item, index) => {
@@ -41,10 +44,15 @@ class WeeklyWeather extends React.Component {
               return (
                 <div key={index} >
                   <p>{item.dt_txt}</p>
-                  <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].description} />
+                  <div className='humidity'>
+                    <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].description} />
+                    <p>{item.main.temp} °</p>
+                  </div>
                   <small>{item.weather[0].description}</small>
-                  <p>{item.main.temp} °C</p>
-                  <p>{item.main.humidity} %</p>
+                  <div className='humidity'>
+                    <FontAwesomeIcon icon={faTint} />
+                    <p>{item.main.humidity} %</p>
+                  </div>
                 </div>)
             })
           }

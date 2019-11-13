@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleUp, faTint, faWind } from '@fortawesome/free-solid-svg-icons';
+import './CurrentWeather.css';
 
 class CurrentWeather extends React.Component {
   constructor() {
@@ -47,11 +48,19 @@ class CurrentWeather extends React.Component {
     return (
       <div>
         <h1>{this.state.name}</h1>
-        <img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt={this.state.description} />
+        <div className='iconAndTemp'>
+          <img src={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt={this.state.description} />
+          <p>{Math.round(this.state.temp)} °</p>
+        </div>
         <small>{this.state.description}</small>
-        <p>{Math.round(this.state.temp)} °C</p>
-        <p>{this.state.humidity} %</p>
-        <p>{this.state.windSpeed * 3.6} km/h</p>
+        <div className='humidity'>
+          <FontAwesomeIcon icon={faTint} />
+          <p> {this.state.humidity} %</p>
+        </div>
+        <div className='humidity'>
+          <FontAwesomeIcon icon={faWind} />
+          <p>{this.state.windSpeed * 3.6} km/h</p>
+        </div>
         <FontAwesomeIcon icon={faArrowCircleUp} style={{ transform: `rotate(${this.state.windDeg}deg)` }} size="2x" />
       </div>
     );

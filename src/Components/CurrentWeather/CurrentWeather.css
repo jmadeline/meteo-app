@@ -1,0 +1,17 @@
+.iconAndTemp, .humidity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconAndTemp p {
+    font-size: 2.3em;
+}
+
+.humidity p {
+    padding-left: 10px;
+}
+
+small {
+    font-style: italic;
+}

@@ -1,4 +1,13 @@
+hr {
+    width: 80%;
+    margin-top: 40px;
+    border: none;
+    height: 1px;
+    background-color: lightcyan;
+}
+
 .weeklyWeather {
     display: flex;
     justify-content: space-around;
 }
+
