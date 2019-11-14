@@ -1,5 +1,5 @@
 import React from 'react';
-import Weather from './Components/CurrentWeather/Weather/Weather';
+import Weather from './Components/Weather/Weather';
 import './App.css';
 
 //https://openweathermap.org/api

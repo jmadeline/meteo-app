@@ -38,12 +38,15 @@ class WeeklyWeather extends React.Component {
         <hr />
         <h2>Prévisions à 5 jours</h2>
         <div className='weeklyWeather'>
-          {this.state.fiveDayWeather.filter((weather, index) => { if (index === 7 || index === 15 || index === 23 || index === 31 || index === 39) { return weather } })
+          {this.state.fiveDayWeather
+            .filter((weather, index) => { if (index === 7 || index === 15 || index === 23 || index === 31 || index === 39) { return weather } })
             .map((item, index) => {
               console.log(item)
+              let date = new Date(Date.parse(item.dt_txt));
+              const options = { weekday: "short", month: "long", day: "numeric" };
               return (
                 <div key={index} >
-                  <p>{item.dt_txt}</p>
+                  <p>{date.toLocaleString("fr-FR", options)}</p>
                   <div className='humidity'>
                     <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].description} />
                     <p>{item.main.temp} °</p>

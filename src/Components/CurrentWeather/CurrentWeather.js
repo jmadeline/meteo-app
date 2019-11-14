@@ -31,6 +31,7 @@ class CurrentWeather extends React.Component {
       });
       axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.latitude}&lon=${this.state.longitude}&units=metric&lang=fr&appid=${this.apiKey}`)
         .then((response) => {
+          console.log(response)
           this.setState({
             name: response.data.name,
             description: response.data.weather[0].description,
@@ -59,7 +60,7 @@ class CurrentWeather extends React.Component {
         </div>
         <div className='humidity'>
           <FontAwesomeIcon icon={faWind} />
-          <p>{this.state.windSpeed * 3.6} km/h</p>
+          <p>{(this.state.windSpeed * 3.6).toFixed(2)} km/h</p>
         </div>
         <FontAwesomeIcon icon={faArrowCircleUp} style={{ transform: `rotate(${this.state.windDeg}deg)` }} size="2x" />
       </div>
