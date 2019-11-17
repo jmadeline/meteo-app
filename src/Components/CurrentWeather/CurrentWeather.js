@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleUp, faTint, faWind } from '@fortawesome/free-solid-svg-icons';
+import { faTint, faWind } from '@fortawesome/free-solid-svg-icons';
 import './CurrentWeather.css';
 
 class CurrentWeather extends React.Component {
@@ -44,7 +44,6 @@ class CurrentWeather extends React.Component {
   }
 
   degreesToCardinal = (deg) => {
-    console.log('deg', deg);
     if (deg > 45 && deg <= 135) {
       return 'E';
     } else if (deg > 135 && deg <= 225) {
@@ -52,13 +51,11 @@ class CurrentWeather extends React.Component {
     } else if (deg > 225 && deg <= 315) {
       return 'O';
     } else if ((deg > 315 && deg < 360) || (deg >= 0 && deg <= 45)) {
-      console.log('N')
       return 'N';
     } else {
       return '';
     }
   }
-
 
   render() {
     return (
