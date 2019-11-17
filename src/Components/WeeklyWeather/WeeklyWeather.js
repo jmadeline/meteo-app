@@ -37,15 +37,19 @@ class WeeklyWeather extends React.Component {
     return dateObject.toLocaleString("fr-FR", options);
   }
 
+  // récupère la météo (à midi) des jours à venir
+  isMidday = (weather, index) => {
+    return (index === 7 || index === 15 || index === 23 || index === 31 || index === 39);
+  }
+
   render() {
-    //filtrer 7 / 15 / 23 / 31 / 39
     return (
       <>
         <hr />
         <h2>Prévisions à 5 jours</h2>
         <div className='weeklyWeather'>
           {this.state.fiveDayWeather
-            .filter((weather, index) => { if (index === 7 || index === 15 || index === 23 || index === 31 || index === 39) { return weather } })
+            .filter(this.isMidday)
             .map((item, index) => {
               return (
                 <div key={index} >
