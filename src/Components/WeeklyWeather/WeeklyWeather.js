@@ -31,6 +31,12 @@ class WeeklyWeather extends React.Component {
     })
   }
 
+  formatDate = (date) => {
+    const dateObject = new Date(Date.parse(date));
+    const options = { weekday: "short", month: "long", day: "numeric" };
+    return dateObject.toLocaleString("fr-FR", options);
+  }
+
   render() {
     //filtrer 7 / 15 / 23 / 31 / 39
     return (
@@ -41,12 +47,9 @@ class WeeklyWeather extends React.Component {
           {this.state.fiveDayWeather
             .filter((weather, index) => { if (index === 7 || index === 15 || index === 23 || index === 31 || index === 39) { return weather } })
             .map((item, index) => {
-              console.log(item)
-              let date = new Date(Date.parse(item.dt_txt));
-              const options = { weekday: "short", month: "long", day: "numeric" };
               return (
                 <div key={index} >
-                  <p>{date.toLocaleString("fr-FR", options)}</p>
+                  <p>{this.formatDate(item.dt_txt)}</p>
                   <div className='humidity'>
                     <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].description} />
                     <p>{item.main.temp} °</p>

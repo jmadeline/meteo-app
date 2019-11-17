@@ -18,10 +18,8 @@ class CurrentWeather extends React.Component {
       windSpeed: 0,
       windDeg: 0
     }
-
     this.apiKey = 'df30c6b21f05a144d97cea827eaf49eb';
   }
-
 
   componentDidMount = () => {
     navigator.geolocation.watchPosition((position) => {
@@ -45,6 +43,23 @@ class CurrentWeather extends React.Component {
     })
   }
 
+  degreesToCardinal = (deg) => {
+    console.log('deg', deg);
+    if (deg > 45 && deg <= 135) {
+      return 'E';
+    } else if (deg > 135 && deg <= 225) {
+      return 'S';
+    } else if (deg > 225 && deg <= 315) {
+      return 'O';
+    } else if ((deg > 315 && deg < 360) || (deg >= 0 && deg <= 45)) {
+      console.log('N')
+      return 'N';
+    } else {
+      return '';
+    }
+  }
+
+
   render() {
     return (
       <div>
@@ -60,9 +75,8 @@ class CurrentWeather extends React.Component {
         </div>
         <div className='humidity'>
           <FontAwesomeIcon icon={faWind} />
-          <p>{(this.state.windSpeed * 3.6).toFixed(2)} km/h</p>
+          <p>{this.degreesToCardinal(this.state.windDeg)} {(this.state.windSpeed * 3.6).toFixed(2)} km/h</p>
         </div>
-        <FontAwesomeIcon icon={faArrowCircleUp} style={{ transform: `rotate(${this.state.windDeg}deg)` }} size="2x" />
       </div>
     );
   }
